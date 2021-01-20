@@ -1,0 +1,50 @@
+#include <cstdio>
+int n,a[505][505];
+int main() 
+{
+	int i,j;
+	scanf("%d",&n);
+	for (i=1;i<=n;i++)
+	  for (j=1;j<=n;j++)
+	    scanf("%d",&a[i][j]);
+	printf("%d",a[1][1]);
+	//  直接输出第一个数 
+	i=j=1;  //  初始化 
+	while (i>=1 && i<=n && j>=1 && j<=n)
+	//  确保遍历的位置在矩阵之内 
+	//  一次循环为一组遍历 
+	{
+		//  遍历标号为偶数的斜线 
+		if (j<n)  //  当前斜线在对角线之前 
+		  j++;
+		else      //  当前斜线在对角线之后 
+		  i++;
+		if (i>n) break;  
+		//  若已经遍历到（n，n）则退出循环
+		//  由于只有当j==n时才会执行i++
+		//  所以当i>n时j一定已经达到n 
+		printf(" %d",a[i][j]);  //  输出第一个数 
+		
+		while (j>1 && i<n) 
+		//  遍历一条斜线 
+		{
+			i++;   j--;
+		    printf(" %d",a[i][j]);
+		}
+		
+		//  遍历编号为奇数的斜线 
+		if (i<n)  //  当前斜线在对角线之前
+		  i++;
+		else     //  当前斜线在对角线之后 
+		  j++;
+		if (j>n) break;
+		printf(" %d",a[i][j]);
+		while (i>1 && j<n)
+		{
+			i--;   j++;
+		    printf(" %d",a[i][j]);
+		}
+		  
+	}
+	return 0;
+}
